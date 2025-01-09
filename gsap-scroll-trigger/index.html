@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP | Scroll Trigger</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <section class="hero">
+        <h1>The <span>Fallen</span> World</h1>
+      </section>
+      <section class="sticky">
+        <div class="bg-img">
+          <img src="/assets/bg-img.jpg" alt="bg" />
+        </div>
+        <canvas class="outline-layer"></canvas>
+        <div class="cards">
+          <div class="card">
+            <div class="card-img">
+              <img src="/assets/image-1.jpg" alt="image-1" />
+            </div>
+            <div class="card-title">
+              <h1>Blue Harpoon</h1>
+              <p>LEVEL142</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-img">
+              <img src="/assets/image-2.jpg" alt="image-2" />
+            </div>
+            <div class="card-title">
+              <h1>Gray Raven</h1>
+              <p>LEVEL244</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-img">
+              <img src="/assets/image-3.jpg" alt="image-3" />
+            </div>
+            <div class="card-title">
+              <h1>Zinc Illuminator</h1>
+              <p>LEVEL299</p>
+            </div>
+          </div>
+        </div>
+        <canvas class="fill-layer"></canvas>
+      </section>
+      <section class="outro">
+        <h1>The <span>World</span> is yours</h1>
+      </section>
+    </div>
+  </body>
+  <script src="https://unpkg.com/lenis@1.1.19/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</html>
