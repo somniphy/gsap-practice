@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setCanvasSize(canvas, ctx) {
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = window.innerWidth * dpr;
+    canvas.width = window.innerWidth * dpr ;
     canvas.height = window.innerHeight * dpr;
     canvas.style.width = `${window.innerWidth}px`;
     canvas.style.height = `${window.innerHeight}px`;
@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.lineWidth = lineWidth;
       ctx.stroke();
     }
+    
     if (fillScale >= SCALE_THRESHOLD) {
       ctx.save();
       ctx.translate(x, y);
@@ -74,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       ctx.closePath();
-      ctx.fillStyle = "#ff6b00";
-      ctx.strokeStyle = "#ff6b00";
+      ctx.fillStyle = "#2563eb";
+      ctx.strokeStyle = "#2563eb";
       ctx.lineWidth = lineWidth;
       ctx.stroke();
       ctx.fill();
@@ -144,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     for (let i = positions.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i - 1));
+      const j = Math.floor(Math.random() * (i + 1));
       [positions[i], positions[j]] = [positions[j], positions[i]];
     }
 
@@ -175,7 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
     onUpdate: (self) => {
       canvasXPosition = -self.progress * 200;
       drawGrid(self.progress);
-
       const cards = document.querySelector(".cards");
       const progress = Math.min(self.progress / 0.654, 1);
       gsap.set(cards, {
