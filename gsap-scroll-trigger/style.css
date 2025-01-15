@@ -8,7 +8,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  font-family: "Roboto", serif;
+  font-family: "Inter", serif;
 }
 
 img {
@@ -19,7 +19,7 @@ img {
 
 h1 {
   text-transform: uppercase;
-  font-family: "Roboto Slab", serif;
+  font-family: "Inter", serif;
   font-weight: 400;
   font-size: 64px;
   line-height: 1;

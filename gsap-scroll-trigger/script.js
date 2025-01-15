@@ -18,10 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function setCanvasSize(canvas, ctx) {
     const dpr = window.devicePixelRatio || 1;
-    canvas.width = window.innerWidth * dpr ;
+    canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
     canvas.style.width = `${window.innerWidth}px`;
     canvas.style.height = `${window.innerHeight}px`;
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transformations
     ctx.scale(dpr, dpr);
   }
 
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.lineWidth = lineWidth;
       ctx.stroke();
     }
-    
+
     if (fillScale >= SCALE_THRESHOLD) {
       ctx.save();
       ctx.translate(x, y);
@@ -160,12 +161,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   initializeTriangles();
   drawGrid();
+  let resizeTimeout;
   window.addEventListener("resize", () => {
-    setCanvasSize(outlineCanvas, outlineCtx);
-    setCanvasSize(fillCanvas, fillCtx);
-    triangleStates.clear();
-    initializeTriangles();
-    drawGrid();
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      setCanvasSize(outlineCanvas, outlineCtx);
+      setCanvasSize(fillCanvas, fillCtx);
+      triangleStates.clear();
+      initializeTriangles();
+      drawGrid();
+    }, 200);
   });
 
   ScrollTrigger.create({
