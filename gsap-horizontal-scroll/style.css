@@ -46,7 +46,7 @@ section.outro {
 }
 
 section.sticky {
-  background-color: #b4aea7;
+  background-color: #141414;
 }
 .slider {
   position: relative;
@@ -89,7 +89,7 @@ section.sticky {
 
 .title h1{
     position: relative;
-    color: #fff;
+    color: #000;
     text-transform: uppercase;
     font-size: 85px;
     font-weight: bold;

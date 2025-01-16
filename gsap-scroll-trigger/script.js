@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.ticker.lagSmoothing(0);
 
   const stickySection = document.querySelector(".sticky");
+  if (!stickySection) {
+    console.error("Sticky section element not found.");
+    return;
+  }
   const stickyHeight = window.innerHeight * 5;
   const outlineCanvas = document.querySelector(".outline-layer");
   const fillCanvas = document.querySelector(".fill-layer");
@@ -22,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.height = window.innerHeight * dpr;
     canvas.style.width = `${window.innerWidth}px`;
     canvas.style.height = `${window.innerHeight}px`;
-    ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transformations
+    ctx.setTransform(1, 0, 0, 1, 0, 0); 
     ctx.scale(dpr, dpr);
   }
 
@@ -76,8 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       ctx.closePath();
-      ctx.fillStyle = "#2563eb";
-      ctx.strokeStyle = "#2563eb";
+      ctx.fillStyle = "#fff";
+      ctx.strokeStyle = "#fff";
       ctx.lineWidth = lineWidth;
       ctx.stroke();
       ctx.fill();
@@ -134,8 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   function initializeTriangles() {
-    const cols = Math.ceil(window.innerWidth / (triangleSize * 0.5));
-    const rows = Math.ceil(window.innerHeight / (triangleSize * 0.5));
+    const cols = Math.ceil(window.innerWidth / (triangleSize * 0.5)) + 2;
+    const rows = Math.ceil(window.innerHeight / (triangleSize * 0.5)) + 2;
     const totalTriangles = rows * cols;
 
     const positions = [];
