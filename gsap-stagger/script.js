@@ -10,15 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.ticker.lagSmoothing(0);
 
   const stickySection = document.querySelector(".sticky");
+
   const cols = document.querySelectorAll(".cols");
-  const stickyHeight = window.innerHeight;
   const logoText = document.querySelector(".logo h1");
   const originalText = logoText.textContent;
 
   ScrollTrigger.create({
     trigger: stickySection,
     start: "bottom bottom",
-    end: `+=${stickyHeight}px`,
+    end: "top bottom",
     scrub: true,
     pin: true,
     pinSpacing: true,
@@ -26,14 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cols.forEach((col) => {
     const letters = col.querySelectorAll(".letter");
-
     gsap.to(letters, {
       y: -600,
       stagger: 0.05,
       ease: "power3.out",
       scrollTrigger: {
         trigger: stickySection,
-        start: "bottom bottom",
+        start: "top top",
         end: "bottom top",
         scrub: true,
       },
@@ -63,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // hide 'eys' in 'Keys'
     .to([chars[3], chars[4], chars[5]], { opacity: 0, duration: 0.3 }, "<")
     // hide '19' from '1977'
-    .to([chars[7], chars[8]], { opacity: 0, duration: 0.3 }, "<")
+    .to([chars[7], chars[8]], { opacity: 0, duration: 0.5 }, "<")
     // spacing between remaining characters
     .to(
       chars,
