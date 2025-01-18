@@ -23,6 +23,7 @@
         padding: 2rem 4rem;
         border-radius: 10px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        transition: background-color 0.5s ease;
       }
 
       .time-container {
@@ -45,6 +46,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        font-family: 'Inter', serif;
         font-size: 5rem;
         font-weight: bold;
         color: #fff;
@@ -56,6 +58,32 @@
         margin: 0 0.5rem;
       }
 
+      .alarm-container {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .alarm-input {
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        border-radius: 5px;
+        border: none;
+        margin-right: 0.5rem;
+      }
+
+      .alarm-button {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: none;
+        background: #333;
+        color: white;
+        cursor: pointer;
+      }
+      .alarm {
+        padding-top: 12px;
+        color: #fff;
+      }
       @keyframes blink {
         50% {
           opacity: 0;
@@ -65,6 +93,13 @@
   </head>
   <body>
     <div class="clock">
+      <div class="alarm-container">
+        <input type="time" class="alarm-input" id="alarmTime" />
+        <button class="alarm-button" onclick="setAlarm()">Set Alarm</button>
+        <!-- <div class="alarm">
+          Alarm at: 
+        </div> -->
+      </div>
       <div class="time-container">
         <div class="digit-container" id="hour1"><div class="digit">0</div></div>
         <div class="digit-container" id="hour2"><div class="digit">0</div></div>
@@ -75,10 +110,13 @@
         <div class="digit-container" id="sec1"><div class="digit">0</div></div>
         <div class="digit-container" id="sec2"><div class="digit">0</div></div>
       </div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
+      let alarmTime = null;
+
       function updateClock() {
         const now = new Date();
         const hours = String(now.getHours()).padStart(2, "0");
@@ -91,6 +129,14 @@
         updateDigit("min2", minutes[1]);
         updateDigit("sec1", seconds[0]);
         updateDigit("sec2", seconds[1]);
+
+        // check if alarm should trigger
+        if (alarmTime) {
+          const currentTime = `${hours}:${minutes}`;
+          if (currentTime === alarmTime) {
+            triggerAlarm();
+          }
+        }
       }
 
       function updateDigit(containerId, newValue) {
@@ -104,7 +150,6 @@
         newDigit.style.transform = "translateY(100%)";
         container.appendChild(newDigit);
 
-     
         gsap.to(currentDigit, {
           duration: 0.5,
           y: "-100%",
@@ -117,6 +162,23 @@
           y: "0%",
           ease: "power4.inOut",
         });
+      }
+
+      function setAlarm() {
+        const alarmInput = document.getElementById("alarmTime");
+        alarmTime = alarmInput.value;
+        // reset clock background
+        document.querySelector(".clock").style.backgroundColor = "#000";
+        // document.querySelector(".alarm")
+      }
+
+
+
+      function triggerAlarm() {
+        document.querySelector(".clock").style.backgroundColor = "#00ff00";
+        // reset alarm after triggering
+        alarmTime = null;
+        document.getElementById("alarmTime").value = "";
       }
 
       updateClock();
