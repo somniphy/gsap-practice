@@ -1,0 +1,250 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: "Inter", serif;
+  background-color: white;
+}
+
+button {
+  font-family: "Inter", serif;
+  font-size: 0.75rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  position: fixed; /* Change from sticky to fixed */
+  top: 0;
+  left: 0; /* Ensure it spans the full width */
+  right: 0; /* Ensure it spans the full width */
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+nav p {
+  color: white;
+  max-width: 50%;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  transform: translateX(0) scale(1.35);
+  filter: saturate(0);
+}
+.logo h1 {
+  font-size: 3.5rem;
+  font-weight: 400;
+  line-height: 0;
+  color: white;
+}
+
+.logo h1 span {
+  display: inline-block;
+  position: relative;
+  will-change: transform;
+}
+
+.letus-know {
+  color: white;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 9999px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.sticky {
+  display: flex; /* Make the container a flexbox */
+  flex-direction: column; /* Stack children vertically */
+  /* Align content to the bottom */
+  width: 100vw;
+  height: 100vh;
+  will-change: transform;
+}
+.cols {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* Ensure bottom alignment for items in cols */
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.col {
+  display: flex;
+  will-change: transform;
+}
+
+.col .letter {
+  font-size: 35vw;
+  font-weight: 500;
+  margin: 0;
+  will-change: transform;
+  line-height: 0.8;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.first-section {
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+}
+
+.marquee {
+  position: relative;
+  color: black;
+  padding: 30px 0;
+  font-weight: 600;
+  font-size: 40px;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.spacer {
+  height: 400px;
+}
+
+.marquee__inner {
+  display: flex;
+  width: fit-content;
+  flex: auto;
+  flex-direction: row;
+  color: #fff;
+}
+
+.marquee__part {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0 4px;
+}
+
+.arrow {
+  width: 50px;
+  height: 50px;
+  margin: 0 1em;
+  transform: rotate(90deg);
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.arrow.active {
+  transform: rotate(-90deg);
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+section.outro {
+  background-color: #141414;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.outro h1 {
+  color: #fff;
+  text-transform: uppercase;
+  font-style: 60px;
+  font-weight: bold;
+  letter-spacing: -2px;
+  line-height: 0.9;
+}
+
+section.sticky {
+  background-color: #141414;
+}
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slides {
+  position: relative;
+  width: 500%;
+  height: 100%;
+  display: flex;
+  will-change: transform;
+  transform: translateX(0);
+}
+
+.slide {
+  position: relative;
+  flex: 1;
+  height: 100%;
+}
+
+.slide:nth-child(1) {
+  background-color: black;
+}
+
+.img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.title {
+  position: relative;
+  width: max-content;
+  height: 200px;
+  margin: 1.5em;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  z-index: 2;
+  mix-blend-mode: difference;
+}
+
+.title h1 {
+  position: relative;
+  top: 40px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 85px;
+  font-weight: bold;
+  letter-spacing: -2px;
+  line-height: 0.9;
+  will-change: transform;
+}
