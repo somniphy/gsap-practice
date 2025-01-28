@@ -77,15 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const work_headers = document.querySelectorAll(".work-header");
   gsap.to(work_headers, {
-    x: 700,
+    x: 100,
     stagger: 0.4,
     ease: "power2.in",
-    scrollTrigger: {
-      trigger: stickySection,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: true,
-    },
   });
 });
 
@@ -100,7 +94,7 @@ const totalMove = slidesContainer.offsetWidth - slider.offsetWidth;
 
 slides.forEach((slide) => {
   const title = slide.querySelector(".title h1");
-  gsap.set(title, { y: -200 });
+  gsap.set(title, { x: -100 });
 });
 
 let currentVisibleIndex = null;
@@ -116,7 +110,7 @@ const observer = new IntersectionObserver((entries) => {
       currentVisibleIndex = currentIndex;
       titles.forEach((title, index) => {
         gsap.to(title, {
-          y: index === currentIndex ? 0 : -200,
+          x: index === currentIndex ? 0 : -300,
           duration: 0.5,
           ease: "power2.out",
           overwrite: true,
@@ -131,7 +125,7 @@ const observer = new IntersectionObserver((entries) => {
 
       titles.forEach((title, index) => {
           gsap.to(title, {
-              y: index === prevIndex ? 0 : -200,
+              x: index === prevIndex ? 0 : -300,
               duration: 0.5,
               ease: "power2.out",
               overwrite: true,
@@ -146,7 +140,7 @@ const observer = new IntersectionObserver((entries) => {
 slides.forEach((slide) => observer.observe(slide));
 
 ScrollTrigger.create({
-  trigger: stickySection,
+  trigger: stickyProject,
   start: "top top",
   end: `+=${stickyHeight}px`,
   scrub: 1,

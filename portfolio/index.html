@@ -16,11 +16,10 @@
     <header>
       <div class="logo">
         <h1>ChrisP<span>.</span></h1>
-        <p>Web Designer & Developer</p>
+        <p>Designer & Developer</p>
       </div>
       <nav>
         <a href="#works">Works</a>
-        <a href="#about">About</a>
         <a href="#contact" class="contact-button">Let's Talk</a>
       </nav>
     </header>
@@ -52,74 +51,114 @@
       </div>
     </section>
 
-    <section class="works" id="works">
-      <div class="header-row"></div>
-      <div class="header-row">
-        <h1 class="intro-header work-header">WORKS</h1>
-      </div>
-      <div class="work-sticky">
-        <div class="slider">
-          <div class="slides">
-            <div class="slide">
+    <section class="works work-sticky" id="works">
+      <div class="slider">
+        <div class="slides">
+          <div class="slide">
+            <h1 class="works-header">Works</h1>
+            <div class="works-preview">
               <div class="img">
-                <img src="/assets/image-1.jpg" alt="" />
+                <img src="/assets/image-3.jpg" alt="image-3" />
               </div>
-              <div class="title">
-                <h1>
-                  Gray <br />
-                  Harpoon
-                </h1>
+              <div class="img">
+                <img src="/assets/image-4.jpg" alt="image-4" />
+              </div>
+              <div class="img">
+                <img src="/assets/image-5.jpg" alt="image-5" />
               </div>
             </div>
-            <div class="slide">
-              <div class="img">
-                <img src="/assets/image-2.jpg" alt="" />
-              </div>
-              <div class="title">
-                <h1>
-                  Blue <br />
-                  Raven
-                </h1>
-              </div>
+          </div>
+          <div class="slide">
+            <div class="img">
+              <img src="/assets/image-1.jpg" alt="" />
             </div>
-            <div class="slide">
-              <div class="img">
-                <img src="/assets/image-3.jpg" alt="" />
-              </div>
-              <div class="title">
-                <h1>
-                  Red <br />
-                  Rubine
-                </h1>
-              </div>
+            <div class="title">
+              <h1>
+                Gray <br />
+                Harpoon
+              </h1>
             </div>
-            <div class="slide">
-              <div class="img">
-                <img src="/assets/image-4.jpg" alt="" />
-              </div>
-              <div class="title">
-                <h1>
-                  Purple <br />
-                  Fourth
-                </h1>
-              </div>
+          </div>
+          <div class="slide">
+            <div class="img">
+              <img src="/assets/image-2.jpg" alt="" />
             </div>
-            <div class="slide">
-              <div class="img">
-                <img src="/assets/image-5.jpg" alt="" />
-              </div>
-              <div class="title">
-                <h1>
-                  Black <br />
-                  Fifth
-                </h1>
-              </div>
+            <div class="title">
+              <h1>
+                Blue <br />
+                Raven
+              </h1>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="img">
+              <img src="/assets/image-3.jpg" alt="" />
+            </div>
+            <div class="title">
+              <h1>
+                Red <br />
+                Rubine
+              </h1>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="img">
+              <img src="/assets/image-4.jpg" alt="" />
+            </div>
+            <div class="title">
+              <h1>
+                Purple <br />
+                Fourth
+              </h1>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="img">
+              <img src="/assets/image-5.jpg" alt="" />
+            </div>
+            <div class="title">
+              <h1>
+                Black <br />
+                Fifth
+              </h1>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section class="about" id="about"></section>
+    <section class="contact" id="contact">
+      <form class="contact-form" action="/submit-form" method="POST">
+        <h2>Contact Us</h2>
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your name"
+          required
+        />
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          placeholder="Enter your message"
+          required
+        ></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
 
     <footer></footer>
   </body>
