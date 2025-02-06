@@ -205,4 +205,106 @@ section {
   width: 345px;
   font-size: 14px;
 }
+.newsletter .email {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.newsletter .email input {
+ border:none;
+ border-bottom: #000 1px solid;
+ width: 592.52px;
+}
 
+/* General Footer Styling */
+.footer {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal sections */
+  gap: 20px;
+  padding: 40px;
+  background-color: #fff;
+  color: #000;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Headings */
+.footer-section h3 {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-family: "MonumentUltra";
+
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 5px;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Contact Section */
+.footer-section.contact p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footer-section.contact .social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-section.contact .social-icons a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* Branding Section */
+.footer-section.branding h1 {
+  font-size: 48px;
+  font-family: "MonumentUltra";
+  margin: 0;
+  line-height: 0.875;
+  text-transform: uppercase;
+}
+
+.footer-section.branding p {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    grid-template-columns: 1fr; /* Single column for mobile */
+  }
+}
