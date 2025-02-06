@@ -33,28 +33,25 @@ document.addEventListener("DOMContentLoaded", () => {
   setCanvasSize(outlineCanvas, outlineCtx);
   setCanvasSize(fillCanvas, fillCtx);
 
-  const triangleSize = 150;
+  const hexagonSize = 200;
+  // Adjust these multipliers to control spacing
+  const horizontalSpacing = 0.45; // Increase for more horizontal space (default: 1.5)
+  const verticalSpacing = 0.9;   // Increase for more vertical space (default: 1.0)
   const lineWidth = 1;
   const SCALE_THRESHOLD = 0.01;
-  const triangleStates = new Map();
+  const hexagonStates = new Map();
   let animationFrameId = null;
   let canvasXPosition = 1;
 
-  function drawTriangle(ctx, x, y, fillScale = 0, flipped = false) {
-    const halfSize = triangleSize / 2;
+  function drawHexagon(ctx, x, y, fillScale = 0) {
+    const radius = hexagonSize / 2;
+    const a = 2 * Math.PI / 6;
 
     if (fillScale < SCALE_THRESHOLD) {
       ctx.beginPath();
-      if (!flipped) {
-        ctx.moveTo(x, y - halfSize);
-        ctx.lineTo(x + halfSize, y + halfSize);
-        ctx.lineTo(x - halfSize, y + halfSize);
-      } else {
-        ctx.moveTo(x, y + halfSize);
-        ctx.lineTo(x + halfSize, y - halfSize);
-        ctx.lineTo(x - halfSize, y - halfSize);
+      for (let i = 0; i < 6; i++) {
+        ctx.lineTo(x + radius * Math.cos(a * i - Math.PI/6), y + radius * Math.sin(a * i - Math.PI/6));
       }
-
       ctx.closePath();
       ctx.strokeStyle = "rgba(255,255,255, 0.075)";
       ctx.lineWidth = lineWidth;
@@ -68,17 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.translate(-x, -y);
 
       ctx.beginPath();
-
-      if (!flipped) {
-        ctx.moveTo(x, y - halfSize);
-        ctx.lineTo(x + halfSize, y + halfSize);
-        ctx.lineTo(x - halfSize, y + halfSize);
-      } else {
-        ctx.moveTo(x, y + halfSize);
-        ctx.lineTo(x + halfSize, y - halfSize);
-        ctx.lineTo(x - halfSize, y - halfSize);
+      for (let i = 0; i < 6; i++) {
+        ctx.lineTo(x + radius * Math.cos(a * i - Math.PI/6), y + radius * Math.sin(a * i - Math.PI/6));
       }
-
       ctx.closePath();
       ctx.fillStyle = "#fff";
       ctx.strokeStyle = "#fff";
@@ -103,17 +92,16 @@ document.addEventListener("DOMContentLoaded", () => {
     let needsUpdate = false;
     const animationSpeed = 0.15;
 
-    triangleStates.forEach((state, key) => {
+    hexagonStates.forEach((state, key) => {
       if (state.scale < 1) {
-        const x =
-          state.col * (triangleSize * 0.5) + triangleSize / 2 + canvasXPosition;
-        const y = state.row * triangleSize + triangleSize / 2;
-        const flipped = (state.row + state.col) % 2 !== 0;
-        drawTriangle(outlineCtx, x, y, 0, flipped);
+        const x = state.col * (hexagonSize * horizontalSpacing) + hexagonSize + canvasXPosition;
+        const y = state.row * (hexagonSize * Math.sqrt(3) * verticalSpacing) + 
+                 (state.col % 2 ? hexagonSize * Math.sqrt(3) * verticalSpacing/2 : 0) + hexagonSize;
+        drawHexagon(outlineCtx, x, y, 0);
       }
     });
 
-    triangleStates.forEach((state, key) => {
+    hexagonStates.forEach((state, key) => {
       const shouldBeVisible = state.order <= animationProgress;
       const targetScale = shouldBeVisible ? 1 : 0;
       const newScale =
@@ -125,11 +113,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (state.scale >= SCALE_THRESHOLD) {
-        const x =
-          state.col * (triangleSize * 0.5) + triangleSize / 2 + canvasXPosition;
-        const y = state.row * triangleSize + triangleSize / 2;
-        const flipped = (state.row + state.col) % 2 !== 0;
-        drawTriangle(fillCtx, x, y, state.scale, flipped);
+        const x = state.col * (hexagonSize * horizontalSpacing) + hexagonSize + canvasXPosition;
+        const y = state.row * (hexagonSize * Math.sqrt(3) * verticalSpacing) + 
+                 (state.col % 2 ? hexagonSize * Math.sqrt(3) * verticalSpacing/2 : 0) + hexagonSize;
+        drawHexagon(fillCtx, x, y, state.scale);
       }
     });
 
@@ -137,10 +124,13 @@ document.addEventListener("DOMContentLoaded", () => {
       animationFrameId = requestAnimationFrame(() => drawGrid(scrollProgress));
     }
   }
-  function initializeTriangles() {
-    const cols = Math.ceil(window.innerWidth / (triangleSize * 0.5)) + 2;
-    const rows = Math.ceil(window.innerHeight / (triangleSize * 0.5)) + 2;
-    const totalTriangles = rows * cols;
+
+  function initializeHexagons() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const cols = Math.ceil(width / (hexagonSize * horizontalSpacing)) + 2;
+    const rows = Math.ceil(height / (hexagonSize * Math.sqrt(3) * verticalSpacing)) + 2;
+    const totalHexagons = rows * cols;
 
     const positions = [];
     for (let r = 0; r < rows; r++) {
@@ -155,15 +145,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     positions.forEach((pos, index) => {
-      triangleStates.set(pos.key, {
-        order: index / totalTriangles,
+      hexagonStates.set(pos.key, {
+        order: index / totalHexagons,
         scale: 0,
         row: pos.row,
         col: pos.col,
       });
     });
   }
-  initializeTriangles();
+  initializeHexagons();
   drawGrid();
   let resizeTimeout;
   window.addEventListener("resize", () => {
@@ -171,8 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
     resizeTimeout = setTimeout(() => {
       setCanvasSize(outlineCanvas, outlineCtx);
       setCanvasSize(fillCanvas, fillCtx);
-      triangleStates.clear();
-      initializeTriangles();
+      hexagonStates.clear();
+      initializeHexagons();
       drawGrid();
     }, 200);
   });

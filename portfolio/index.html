@@ -52,19 +52,30 @@
     </section>
 
     <section class="works work-sticky" id="works">
+      <canvas class="outline-layer"></canvas>
       <div class="slider">
         <div class="slides">
           <div class="slide">
             <h1 class="works-header">Works</h1>
-            <div class="works-preview">
-              <div class="img">
+
+            <div class="images stacked-container">
+              <div class="img stacked">
+                <img src="/assets/image-1.jpg" alt="image-3" />
+              </div>
+              <div class="img stacked">
+                <img src="/assets/image-2.jpg" alt="image-3" />
+              </div>
+              <div class="img stacked">
                 <img src="/assets/image-3.jpg" alt="image-3" />
               </div>
-              <div class="img">
+              <div class="img stacked">
                 <img src="/assets/image-4.jpg" alt="image-4" />
               </div>
-              <div class="img">
+              <div class="img stacked">
                 <img src="/assets/image-5.jpg" alt="image-5" />
+              </div>
+              <div class="img stacked">
+                <img src="/assets/image-6.jpg" alt="" />
               </div>
             </div>
           </div>
@@ -125,40 +136,16 @@
           </div>
         </div>
       </div>
+      <canvas class="fill-layer"></canvas>
     </section>
-    <section class="contact" id="contact">
-      <form class="contact-form" action="/submit-form" method="POST">
-        <h2>Contact Us</h2>
-        <label for="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Enter your name"
-          required
-        />
-
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Enter your email"
-          required
-        />
-
-        <label for="message">Message</label>
-        <textarea
-          id="message"
-          name="message"
-          rows="5"
-          placeholder="Enter your message"
-          required
-        ></textarea>
-
-        <button type="submit">Send Message</button>
-      </form>
+    <section class="outro">
+      <h1>Yeah</h1>
     </section>
+  
+   
+
+
+   
 
     <footer></footer>
   </body>

@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const stickyHeight = window.innerHeight * 6;
   const totalMove = slidesContainer.offsetWidth - slider.offsetWidth;
-  const slideWidth = slider.offsetWidth;
 
   slides.forEach((slide) => {
     const title = slide.querySelector(".title h1");

@@ -23,12 +23,13 @@ header {
   left: 0;
   right: 0;
   z-index: 2;
-  background-color: #fff;
 }
 
 section {
+  position: relative;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 .home {
@@ -54,6 +55,33 @@ section {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   z-index: 2;
 }
+
+.images.stacked-container {
+  margin-top: 24px;
+  position: fixed;
+  left: 1em;
+  top: 2em;
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 0.5rem;
+  transform: none;
+  will-change: transform;
+}
+
+.img.stacked {
+  position: relative;
+  width: 150px;
+  height: 100px;
+  transform: none;
+  top: auto;
+  left: auto;
+  opacity: 1;
+  will-change: transform;
+}
+
 
 
 .intro-header {
@@ -238,33 +266,56 @@ p {
   border-radius: 8px;
   background-color: #f9f9f9;
 }
+/* .gon {
+  width: 240px;
+  height: 220px;
+} */
 
-.contact-form label {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
-}
-
-.contact-form input,
-.contact-form textarea {
+/* .hexa {
+  background: #000;
+  width: 190px;
+  -webkit-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+  );
+  -moz-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+  );
+  -ms-clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+  );
+  clip-path: polygon(
+    50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%
+  );
+} */
+/* 
+.random {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  height: 100%;
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
+  overflow: hidden;
+} */
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 150%;
 }
 
-.contact-form button {
-  padding: 0.75rem;
-  background-color: #09090b;
+.outline-layer {
+  z-index: -1;
+}
+
+.fill-layer {
+  z-index: 2;
+}
+
+.outro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
   color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.contact-form button:hover {
-  background-color: #a3e635;
-  transition: background 300ms;
 }
