@@ -44,8 +44,6 @@ img {
   width: 100%;
   height: 100%;
   position: relative;
-  width: 100%;
-  height: 100%;
   object-fit: cover;
   will-change: transform;
 }
@@ -124,6 +122,12 @@ section {
   line-height: 0.8;
 }
 
+.demo .col h1 {
+  font-family: "MonumentUltra", serif;
+  text-transform: uppercase;
+  font-size: 128px;
+  line-height: 1;
+}
 .pedals {
   margin-top: 32px;
 }
@@ -190,3 +194,15 @@ section {
   height: 507px;
   width: 632px;
 }
+
+.demo-img img {
+  width: 100%;
+  height: 805px;
+  border-radius: 32px;
+}
+
+.newsletter .section-header p {
+  width: 345px;
+  font-size: 14px;
+}
+
