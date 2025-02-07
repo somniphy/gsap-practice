@@ -1,3 +1,4 @@
+/* Font Faces */
 @font-face {
   font-family: "MonumentRegular";
   src: url("monumentextended-regular-webfont.woff2") format("woff2"),
@@ -14,13 +15,7 @@
   font-style: normal;
 }
 
-.geist {
-  font-family: "Geist", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
+/* Global Styles */
 * {
   padding: 0;
   margin: 0;
@@ -40,28 +35,48 @@ svg {
   height: 20px;
   width: 20px;
 }
+
 img {
   width: 100%;
   height: 100%;
-  position: relative;
   object-fit: cover;
   will-change: transform;
 }
-.featured1 {
-  transform: rotate(34.2deg) translateY(-3.5rem);
+
+/* Typography */
+.geist {
+  font-family: "Geist", serif;
 }
-.featured2 {
-  transform: rotate(-46.39deg) translateY(5rem);
+
+.logo h1,
+.col h1,
+.demo .col h1,
+.section-header h1,
+.footer-section.branding h1 {
+  font-family: "MonumentUltra", serif;
+  text-transform: uppercase;
 }
-header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 1.5rem;
+
+.logo h1 {
+  font-size: 1rem;
 }
+.col h1,
+.demo .col h1 {
+  font-size: 128px;
+  line-height: 0.8;
+}
+.demo .col h1 {
+  line-height: 1;
+}
+.section-header h1 {
+  font-size: 64px;
+}
+.footer-section.branding h1 {
+  font-size: 48px;
+  line-height: 0.875;
+}
+
+/* Buttons */
 button {
   font-family: "Geist", serif;
   font-size: 14px;
@@ -69,40 +84,49 @@ button {
   font-weight: 500;
   border: none;
 }
+
 .explore-button {
   padding: 13px 20px;
   width: 240px;
   background-color: #000;
   color: #fff;
 }
-.logo h1 {
-  font-family: "MonumentUltra", serif;
-  font-optical-sizing: auto;
-  font-size: 1rem;
-}
-nav {
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
 
-  .nav-link a {
-    font-weight: 500;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #000;
-  }
+/* Header */
+header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
 }
+
+/* Navigation */
+nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link a {
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+}
+
+/* Sections */
 section {
   position: relative;
-  height: 100%;
   width: 100%;
   padding: 1.5rem;
   overflow: hidden;
 }
 
+/* .hero {
+  margin-top: 10%;
+} */
 .row {
   display: flex;
   justify-content: space-between;
@@ -111,23 +135,18 @@ section {
 
 .col p {
   width: 342px;
-  text-transform: uppercase;
   font-size: 14px;
 }
 
-.col h1 {
-  font-family: "MonumentUltra", serif;
-  text-transform: uppercase;
-  font-size: 128px;
-  line-height: 0.8;
+/* Featured Transformations */
+.featured1 {
+  transform: rotate(34.2deg) translateY(-3.5rem);
+}
+.featured2 {
+  transform: rotate(-46.39deg) translateY(5rem);
 }
 
-.demo .col h1 {
-  font-family: "MonumentUltra", serif;
-  text-transform: uppercase;
-  font-size: 128px;
-  line-height: 1;
-}
+/* Pedals Section */
 .pedals {
   margin-top: 32px;
 }
@@ -138,44 +157,37 @@ section {
   align-items: center;
 }
 
-.section-header h1 {
-  font-family: "MonumentUltra", serif;
-  font-size: 64px;
-}
-
-.pedals-cards {
+.pedals-cards,
+.collection-cards {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.pedal-card {
+.pedal-card,
+.collection-card {
   position: relative;
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Horizontal centering for all children */
+  align-items: center;
   background: #f1f1f1;
+}
+
+.pedal-card {
   height: 450px;
   width: 416px;
 }
 
 .pedal-card img {
-  margin-bottom: auto; /* Push the footer down */
+  margin-bottom: auto;
   width: 180px;
   height: 287.43px;
 }
 
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%; /* Ensure the footer takes the full width */
-}
-
-.collection-cards {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.collection-card {
+  height: 507px;
+  width: 632px;
 }
 
 .collection-card img {
@@ -184,44 +196,42 @@ section {
   margin-bottom: auto;
 }
 
-.collection-card {
-  position: relative;
-  padding: 24px 16px;
+.card-footer {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Horizontal centering for all children */
-  background: #f1f1f1;
-  height: 507px;
-  width: 632px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .demo-img img {
-  width: 100%;
-  height: 805px;
-  border-radius: 32px;
+    width: 100%;
+    height: 805px;
+    border-radius: 32px;
 }
 
+/* Newsletter */
 .newsletter .section-header p {
   width: 345px;
   font-size: 14px;
 }
+
 .newsletter .email {
   margin-top: 80px;
   display: flex;
   justify-content: center;
   gap: 8px;
 }
+
 .newsletter .email input {
- border:none;
- border-bottom: #000 1px solid;
- width: 592.52px;
+  border: none;
+  border-bottom: #000 1px solid;
+  width: 592.52px;
 }
 
-/* General Footer Styling */
+/* Footer */
 .footer {
   margin-top: 24px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 equal sections */
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 40px;
   background-color: #fff;
@@ -234,14 +244,12 @@ section {
   gap: 10px;
 }
 
-/* Headings */
 .footer-section h3 {
   font-size: 16px;
   font-weight: 500;
   text-transform: uppercase;
   margin-bottom: 10px;
   font-family: "MonumentUltra";
-
 }
 
 .footer-section ul {
@@ -264,9 +272,7 @@ section {
   text-decoration: underline;
 }
 
-/* Contact Section */
 .footer-section.contact p {
-  margin: 0;
   font-size: 14px;
   font-weight: 500;
 }
@@ -281,15 +287,6 @@ section {
   color: #000;
 }
 
-/* Branding Section */
-.footer-section.branding h1 {
-  font-size: 48px;
-  font-family: "MonumentUltra";
-  margin: 0;
-  line-height: 0.875;
-  text-transform: uppercase;
-}
-
 .footer-section.branding p {
   font-size: 14px;
   margin-top: 10px;
@@ -299,12 +296,11 @@ section {
 /* Responsive Design */
 @media (max-width: 768px) {
   .footer {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
-
 @media (max-width: 480px) {
   .footer {
-    grid-template-columns: 1fr; /* Single column for mobile */
+    grid-template-columns: 1fr;
   }
 }
