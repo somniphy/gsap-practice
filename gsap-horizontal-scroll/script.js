@@ -77,6 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
         gsap.set(slidesContainer, {
             x: -mainMove,
         })
-    }
+    }   
   });
 });
