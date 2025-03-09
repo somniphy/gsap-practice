@@ -93,6 +93,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  top:0;
+  left: 0;
 }
 
 .menu-close {
