@@ -1,163 +1,175 @@
-const lenis = new Lenis();
-lenis.on("scroll", ScrollTrigger.update);
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
-});
-gsap.ticker.lagSmoothing(0);
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.innerWidth >= 900) {
+    const lenis = new Lenis();
+    const videoContainer = document.querySelector(".video-container-desktop");
+    const videoTitleElements = document.querySelectorAll(".video-title p");
 
-const scene = new THREE.Scene();
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
 
-const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-);
+    const breakpoints = [
+      { maxWidth: 1000, translateY: -135, movMultiplier: 450 },
+      { maxWidth: 1100, translateY: -130, movMultiplier: 500 },
+      { maxWidth: 1200, translateY: -125, movMultiplier: 550 },
+      { maxWidth: 1300, translateY: -120, movMultiplier: 600 },
+    ];
 
-const renderer = new THREE.WebGLRenderer({
-  antialias: true,
-  alpha: true,
-});
+    const getInitialValues = () => {
+      const width = window.innerWidth;
 
-renderer.setClearColor(0x000000, 0);
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadow;
-renderer.physicallyCorrectLights = true;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 2.5;
-document.querySelector(".model").appendChild(renderer.domElement);
-
-const ambientLight = new THREE.AmbientLight(0x0fffff, 0.75);
-scene.add(ambientLight);
-
-const mainLight = new THREE.DirectionalLight(0xffffff, 7.5);
-mainLight.position.set(0.5, 7.5, 2.5);
-scene.add(mainLight);
-
-const fillLight = new THREE.DirectionalLight(0xffffff, 2.5);
-fillLight.position.set(-15, 0, -5);
-scene.add(fillLight);
-
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 1.5);
-hemiLight.position.set(0, 0, 0);
-scene.add(hemiLight);
-
-function basicAnimate() {
-  renderer.render(scene, camera);
-  requestAnimationFrame(basicAnimate);
-}
-
-basicAnimate();
-
-let model;
-const loader = new THREE.GLTFLoader();
-loader.load("/assets/keyboard_casio_vl-tone.glb", function (gltf) {
-  model = gltf.scene;
-  model.traverse((node) => {
-    if (node.isMesh) {
-      if (node.material) {
-        node.material.metalness = 2;
-        node.material.roughness = 3;
-        node.material.envMapIntensity = 5;
+      for (const bp of breakpoints) {
+        if (width <= bp.maxWidth) {
+          return {
+            translateY: bp.translateY,
+            movementMultiplier: bp.movMultiplier,
+          };
+        }
       }
-      node.castShadow = true;
-      node.receiveShadow = true;
-    }
+
+      return {
+        translateY: -80,
+        movementMultiplier: 650,
+      };
+    };
+    const initialValues = getInitialValues();
+
+    const animationState = {
+      scrollProgress: 0,
+      initialTranslateY: initialValues.translateY,
+      currentTranslateY: initialValues.translateY,
+      movementMultiplier: initialValues.movementMultiplier,
+      scale: 0.25,
+      fontSize: 80,
+      gap: 2,
+      targetMouseX: 0,
+      currentMouseX: 0,
+    };
+
+    window.addEventListener("resize", () => {
+      ScrollTrigger.refresh();
+      const newValues = getInitialValues();
+      animationState.initialTranslateY = newValues.translateY;
+      animationState.movementMultiplier = newValues.movementMultiplier;
+
+      if (animationState.scrollProgress === 0) {
+        animationState.currentTranslateY = newValues.translateY;
+      }
+    });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".intro",
+        start: "top bottom",
+        end: "top 10%",
+        scrub: true,
+        onUpdate: (self) => {
+          animationState.scrollProgress = self.progress;
+
+          animationState.currentTranslateY = gsap.utils.interpolate(
+            animationState.initialTranslateY,
+            0,
+            animationState.scrollProgress
+          );
+          animationState.scale = gsap.utils.interpolate(
+            0.25,
+            1,
+            animationState.scrollProgress
+          );
+          animationState.gap = gsap.utils.interpolate(
+            2,
+            1,
+            animationState.scrollProgress
+          );
+          if (animationState.scrollProgress <= 0.4) {
+            const firstPartProgress = animationState.scrollProgress / 0.4;
+            animationState.fontSize = gsap.utils.interpolate(
+              80,
+              40,
+              firstPartProgress
+            );
+          } else {
+            const secondPartProgress =
+              (animationState.scrollProgress - 0.4) / 0.6;
+            animationState.fontSize = gsap.utils.interpolate(
+              40,
+              20,
+              secondPartProgress
+            );
+          }
+        },
+      },
+    });
+    document.addEventListener("mousemove", (e) => {
+      animationState.targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    });
+
+    const animate = () => {
+      if (window.innerWidth <= 900) return;
+
+      const {
+        scale,
+        targetMouseX,
+        currentMouseX,
+        currentTranslateY,
+        fontSize,
+        gap,
+        movementMultiplier,
+      } = animationState;
+
+      const scaleMovementMultiplier = (1 - scale) * movementMultiplier;
+
+      const maxHorizontalMovement =
+        scale < 0.95 ? targetMouseX * scaleMovementMultiplier : 0;
+      animationState.currentMouseX = gsap.utils.interpolate(
+        currentMouseX,
+        maxHorizontalMovement,
+        0.05
+      );
+
+      videoContainer.style.transform = `translateY(${currentTranslateY}%) translateX(${animationState.currentMouseX}px) scale(${scale})`;
+      videoContainer.style.gap = `${gap}em`;
+      videoTitleElements.forEach((element) => {
+        element.style.fontSize = `${fontSize}px`;
+      });
+      requestAnimationFrame(animate);
+    };
+    animate();
+  }
+
+  const splitText = new SplitType(".outro-copy h2", {
+    types: "lines",
+    lineClass: "line",
   });
-  const box = new THREE.Box3().setFromObject(model);
-  const center = box.getCenter(new THREE.Vector3());
-  model.position.sub(center);
-  scene.add(model);
 
-  const size = box.getSize(new THREE.Vector3());
-  const maxDim = Math.max(size.x, size.y, size.z);
-  camera.position.z = maxDim * 1.75;
+  splitText.lines.forEach((line) => {
+    const text = line.innerHTML;
+    line.innerHTML = `<span style="display:block; transform:translateY(70px);">${text}</span>`;
+  });
 
-  model.scale.set(0, 0, 0, 0);
-  model.rotation.set(0, 0.5, 0);
-  playInitialAnimation();
-
-  cancelAnimationFrame(basicAnimate);
-  animate();
-});
-
-const floatAmplitude = 0.2;
-const floatSpeed = 1.5;
-const rotationSpeed = 0.3;
-let isFloating = true;
-let currentScroll = 0;
-
-const totalScrollHeight =
-  document.documentElement.scrollHeight - window.innerHeight;
-
-function playInitialAnimation() {
-  if (model) {
-    gsap.to(model.scale, {
-      x: 1,
-      y: 1,
-      z: 1,
-      duration: 1,
-      ease: "power2.out",
-    });
-  }
-}
-
-lenis.on("scroll", (e) => {
-  currentScroll = e.scroll;
-});
-
-function animate() {
-  if (model) {
-    if (isFloating) {
-      const floatOffset =
-        Math.sin(Date.now() * 0.001 * floatSpeed) * floatAmplitude;
-      model.position.y = floatOffset;
-    }
-    const scrollProgress = Math.min(currentScroll / totalScrollHeight, 1);
-
-    const baseTilt = 0.5;
-    model.rotation.x = scrollProgress * Math.PI * 4 + baseTilt;
-  }
-
-  renderer.render(scene, camera);
-  requestAnimationFrame(animate);
-}
-
-const introSection = document.querySelector(".intro");
-const archiveSection = document.querySelector(".archive");
-const outroSection = document.querySelector(".outro");
-
-const splitText = new SplitType(".outro-copy h2", {
-  types: "lines",
-  lineClass: "line",
-});
-
-splitText.lines.forEach((line) => {
-  const text = line.innerHTML;
-  line.innerHTML = `<span style="display:block; transform:translateY(70px);">${text}</span>`;
-});
-
-ScrollTrigger.create({
-  trigger: ".outro",
-  start: "top center",
-  onEnter: () => {
-    gsap.to(".outro-copy h2 .line span", {
-      translateY: 0,
-      duration: 1,
-      stagger: 0.1,
-      ease: "power3.out",
-      force3D: true,
-    });
-  },
-  onLeaveBack: () => {
-    gsap.to(".outro-copy h2 .line span", {
-      translateY: 70,
-      duration: 1,
-      stagger: 0.1,
-      ease: "power3.out",
-      force3D: true,
-    });
-  }, toggleAction: "play reverse play reverse"
+  ScrollTrigger.create({
+    trigger: ".outro",
+    start: "top center",
+    onEnter: () => {
+      gsap.to(".outro-copy h2 .line span", {
+        translateY: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        force3D: true,
+      });
+    },
+    onLeaveBack: () => {
+      gsap.to(".outro-copy h2 .line span", {
+        translateY: 70,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        force3D: true,
+      });
+    },
+    toggleAction: "play reverse play reverse",
+  });
 });
