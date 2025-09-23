@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
       transformOrigin: "center center",
       pointerEvents: "none",
       willChange: "transform",
-      zIndex: 100,
+      zIndex: 5,
     });
 
     document.body.appendChild(pinnedMarqueeImgClone);

@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   gsap.set(menuContent, { y: "50%", opacity: 0.25 });
-  gsap.set(menuImage, { scale: "50%", opacity: 0.25 });
+  gsap.set(menuImage, { scale: 0.5, opacity: 0.25 });
   gsap.set(menuLinks, { y: "150%" });
   gsap.set(linkHighlighter, { y: "150%" });
 
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ease: "expo.out",
         onComplete: () => {
           gsap.set(menuOverlay, {
-            clipPath: "polygon(0% 100%, 100% 0%, 100% 100%, 0% 100%)",
+            clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
           });
           gsap.set(menuLinks, { y: "150%" });
           gsap.set(linkHighlighter, { y: "150%" });
@@ -198,31 +198,105 @@ document.addEventListener("DOMContentLoaded", () => {
         ease: "expo.inOut",
       });
     });
-    
+
     link.addEventListener("mouseleave", () => {
-        
       if (window.innerWidth < 1000) return;
 
       const linkCopy = link.querySelectorAll("a span");
       const visibleCopy = linkCopy[0];
       const animatedCopy = linkCopy[1];
 
-      const visibleChars = visibleCopy.querySelectorAll(".char");
-      gsap.to(visibleChars, {
-        y: "-110%",
+      const animatedChars = animatedCopy.querySelectorAll(".char");
+      gsap.to(animatedChars, {
+        y: "110%",
         stagger: 0.03,
         duration: 0.5,
         ease: "expo.inOut",
       });
 
-      const animatedChars = animatedCopy.querySelectorAll(".char");
-      gsap.to(animatedChars, {
+      const visibleChars = visibleCopy.querySelectorAll(".char");
+      gsap.to(visibleChars, {
         y: "0%",
         stagger: 0.03,
         duration: 0.5,
         ease: "expo.inOut",
       });
     });
+  });
+
+  menuOverlay.addEventListener("mousemove", (e) => {
+    if (window.innerWidth < 1000) return;
+
+    const mouseX = e.clientX;
+    const viewportWidth = window.innerWidth;
+    const menuLinksWrapperWidth = menuLinksWrapper.offsetWidth;
+
+    const maxMoveLeft = 0;
+    const maxMoveRight = viewportWidth - menuLinksWrapperWidth;
+
+    const sensitivityRange = viewportWidth * 0.5;
+    const startX = (viewportWidth - sensitivityRange) / 2;
+    const endX = startX * sensitivityRange;
+
+    let mousePercentage;
+    if (mouseX <= startX) {
+      mousePercentage = 0;
+    } else if (mouseX >= endX) {
+      mousePercentage = 1;
+    } else {
+      mousePercentage = (mouseX - startX) / sensitivityRange;
+    }
+    targetX = maxMoveLeft + mousePercentage * (maxMoveRight - maxMoveLeft);
+  });
+
+  menuLinkContainers.forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      if (window.innerWidth < 1000) return;
+
+      const linkRect = link.getBoundingClientRect();
+      const menuWrapperRect = menuLinksWrapper.getBoundingClientRect();
+
+      targetHighlighterX = linkRect.left - menuWrapperRect.left;
+
+      const linkCopyElement = link.querySelector("a span");
+      targetHighlighterWidth = linkCopyElement
+        ? linkCopyElement.offsetWidth
+        : link.offsetWidth;
     });
   });
+
+  menuLinksWrapper.addEventListener("mouseleave", () => {
+    const defaultLinkText = document.querySelector(".menu-link:first-child");
+    const defaultLinkTextSpan = defaultLinkText.querySelector("a span");
+
+    const linkRect = defaultLinkText.getBoundingClientRect();
+    const menuWrapperRect = menuLinksWrapper.getBoundingClientRect();
+
+    targetHighlighterX = linkRect.left - menuWrapperRect.left;
+    targetHighlighterWidth = defaultLinkTextSpan.offsetWidth;
+  });
+
+  function animate() {
+    currentX += (targetX - currentX) * lerpFactor;
+    currentHighlighterX +=
+      (targetHighlighterX - currentHighlighterX) * lerpFactor;
+    currentHighlighterWidth +=
+      (targetHighlighterWidth - currentHighlighterWidth) * lerpFactor;
+
+    gsap.to(menuLinksWrapper, {
+      x: currentX,
+      duration: 0.3,
+      ease: "power4.out",
+    });
+    
+    gsap.to(linkHighlighter, {
+      x: currentHighlighterX,
+      width: currentHighlighterWidth,
+      duration: 0.3,
+      ease: "power4.out",
+    });
+
+    requestAnimationFrame(animate);
+  }
+  animate();
 });
