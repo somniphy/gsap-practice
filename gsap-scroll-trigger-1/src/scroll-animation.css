@@ -3,6 +3,7 @@
 :root {
   --light: #edf1e8;
   --dark: #101010;
+  --accent-gray: #1e1e1e;
 }
 
 * {
@@ -96,7 +97,7 @@ h1 {
   position: relative;
   margin: 0 auto;
   width: 60%;
-  color: var(--dark);
+  color: var(--accent-gray);
   --clip-value: 100%;
 }
 
