@@ -1,0 +1,273 @@
+@import url("https://fonts.cdnfonts.com/css/pp-neue-montreal");
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "PP Neue Montreal", sans-serif;
+}
+
+html,
+body {
+  height: auto; /* Don't force a fixed height */
+  min-height: 100vh; /* Make sure it fills at least the screen */
+  width: 100vw;
+  background-color: #111;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.hero-header {
+  text-transform: uppercase;
+  font-size: 14vw;
+  line-height: 0.85;
+}
+
+a,
+p {
+  text-decoration: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.model {
+  position: fixed;
+  z-index: 2;
+}
+
+.nav {
+  position: fixed;
+  background-color: #000;
+  width: 100%;
+  height: 100px;
+  padding: 0 4em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 999;
+  mix-blend-mode: difference;
+}
+  
+
+.logo {
+  position: fixed;
+  top: 24px;
+  left: 12%;
+  transform: translateX(-50%);
+  padding: 1em;
+  z-index: 300;
+  mix-blend-mode: difference;
+  font-weight: bold;
+}
+
+.content {
+  width: 100%;
+  position: relative;
+  padding: 4em;
+}
+
+/* Remove fixed height from .content so it grows with internal sections */
+.content img {
+  width: 100%;
+}
+
+img {
+  margin-bottom: 4em;
+}
+
+/* Optional: uncomment if you want sections to take full viewport height
+section {
+  height: 100vh;
+  width: 100vw;
+}
+*/
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em;
+}
+
+.hero-copy {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.header-row {
+  display: flex;
+  gap: 12em;
+  align-items: center;
+}
+
+.header-row p {
+  text-transform: uppercase;
+  width: 20%;
+}
+
+.archive {
+  height: 200vh;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.archive-header p {
+  text-transform: uppercase;
+}
+
+.archive h2 {
+  font-size: 120px;
+  font-weight: 300;
+  color: #4f4f4f;
+}
+
+.archive-info {
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.archive-info p {
+  text-transform: uppercase;
+  color: #4f4f4f;
+}
+.intro {
+  height: 100%;
+}
+
+.video-container-desktop {
+  position: relative;
+  transform: translateY(-100%) scale(0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  will-change: transform;
+}
+
+.video-container-desktop .video-title p {
+  position: relative;
+  font-size: 64px;
+  font-weight: 500;
+  color: #fff;
+  font-family: "PP Neue Montreal", sans-serif;
+  z-index: 400;
+}
+
+.video-container-mobile {
+  display: none;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.video-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+@media (max-width: 900px) {
+  nav,
+  section {
+    padding: 1.5em;
+  }
+  .hero {
+    justify-content: flex-end;
+    gap: 2em;
+  }
+  .video-container-desktop {
+    display: none;
+  }
+  .video-container-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+}
+.outro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2em;
+}
+
+.outro-copy h2 {
+  width: 75%;
+  text-transform: uppercase;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 0.5em;
+}
+
+.outro-copy h2 .line {
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  display: block;
+}
+  
+.outro-copy h2 .line span {
+  position: relative;
+  will-change: transform;
+  display: flex;
+  transform: translateY(70px);
+}
+
+.outro-copy p {
+  display: flex;
+  margin: 1em 0;
+  gap: 2em;
+  text-transform: uppercase;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  text-transform: uppercase;
+}
+
+/* Lenis scroll behavior override helpers */
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
