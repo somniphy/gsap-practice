@@ -1,0 +1,135 @@
+@import url("https://fonts.cdnfonts.com/css/pp-neue-montreal");
+
+:root {
+  --light: #edf1e8;
+  --dark: #101010;
+  --accent: #fca311;
+  --gray: #1e1e1e
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "PP Neue Montreal", sans-serif;
+  background-color: var(--dark);
+}
+a {
+  text-decoration: none;
+}
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.nav-items {
+  display: flex;
+  gap: 2rem;
+}
+
+nav .logo p {
+  color: var(--light);
+  font-weight: 700;
+}
+.hero-footer {
+  bottom: 0;
+}
+
+section {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  padding: 32px;
+}
+
+.roll {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 1rem;
+  text-decoration: none;
+}
+
+.text {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.88rem;
+  letter-spacing: -0.02rem;
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.roll .text {
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.roll .text:nth-child(1) {
+  transform: translateY(0%);
+}
+
+.roll .text:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(100%);
+}
+
+.roll:hover .text:nth-child(1) {
+  transform: translateY(-100%);
+}
+
+.roll:hover .text:nth-child(2) {
+  transform: translateY(0%);
+}
+
+.hero-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-logo h1 {
+  font-size: 24vh;
+  color: var(--accent);
+}
+
+.copy {
+  font-weight: 500;
+  font-size: 3rem;
+  position: relative;
+  margin: 0 auto;
+  color: var(--gray);
+  --clip-value: 100%;
+}
+
+.copy::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--accent);
+  clip-path: inset(0 0 var(--clip-value) 0);
+  will-change: clip-path;
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 4rem;
+}
