@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product slider</title>
+    <link rel="stylesheet" href="src/lenis-helper.css" />
+    <link rel="stylesheet" href="src/product-slider.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <div class="logo">
+          <p>Product Slider / GSAP</p>
+        </div>
+        <div class="product-name">
+          <p>Hera Chair</p>
+        </div>
+      </div>
+      <div class="gallery">
+        <ul class="products"></ul>
+        <div class="controller">
+          <div class="controller-inner">
+            <div class="close-icon">
+              <!-- <i data-lucide="x"></i> -->
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <div class="controller-outer">
+            <div class="controller-label">
+              <p>Menu</p>
+            </div>
+            <div class="nav-btn prev">
+              <i data-lucide="rewind"></i>
+            </div>
+            <div class="nav-btn next">
+              <i data-lucide="fast-forward"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-banner">
+        <img src="/products/product-1.png" alt="" />
+      </div>
+      <div class="product-preview">
+        <div class="product-preview-info">
+          <div class="product-preview-name">
+            <p>Hera Chair</p>
+          </div>
+          <div class="product-preview-tag">
+            <p>Minimal</p>
+          </div>
+        </div>
+        <div class="product-preview-img">
+          <img src="/products/product-1.png" alt="" />
+        </div>
+        <div class="product-url">
+          <div class="btn">
+            <a href="#">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="src/product-slider.js"></script>
+  </body>
+</html>
