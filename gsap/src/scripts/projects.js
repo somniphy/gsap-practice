@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     workItem.className = "work-item";
     workItem.innerHTML = `
     <div class="work-item-img">
-    <img src="${project.img}" alt="${project.name}" />
+    <img src="${project.img}" alt="${project.name}" class="parallax-img" data-parallax-direction="normal" />
     </div>
     <div class="work-item-copy">
     <h3>${project.name}</h3>
@@ -45,6 +45,33 @@ document.addEventListener("DOMContentLoaded", () => {
     workContainer.appendChild(row);
   }
 
+  function initParallaxImages(next = document) {
+    const targets = next.querySelectorAll(".parallax-img");
+
+    targets.forEach((target) => {
+      const direction =
+        target.getAttribute("data-parallax-direction") || "normal";
+      const yStart = direction === "reverse" ? -32 : 32; // tweak values for effect
+      const yEnd = direction === "reverse" ? 32 : -32;
+
+      gsap.fromTo(
+        target,
+        { yPercent: yStart },
+        {
+          yPercent: yEnd,
+          ease: "none",
+          scrollTrigger: {
+            trigger: target.parentElement,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    });
+  }
+
+  initParallaxImages();
   gsap.set(".work-item", {
     y: 1000,
   });

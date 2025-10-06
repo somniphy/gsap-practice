@@ -1,5 +1,5 @@
 import { gsap } from "gsap";
-import { SplitText } from "gsap/all";
+import { SplitText } from "gsap/SplitText";
 
 document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(SplitText);
